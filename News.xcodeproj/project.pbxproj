@@ -14,6 +14,12 @@
 		4D5FC7BC248B015D00A10091 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D5FC7BB248B015D00A10091 /* Preview Assets.xcassets */; };
 		4D5FC7BF248B015D00A10091 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D5FC7BD248B015D00A10091 /* LaunchScreen.storyboard */; };
 		4D5FC7CA248B015E00A10091 /* NewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FC7C9248B015E00A10091 /* NewsTests.swift */; };
+		4DA47B38248EA79F00A42CD3 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA47B37248EA79F00A42CD3 /* AsyncImage.swift */; };
+		C14203914CB6F324C954D204 /* secondViewTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1420E2D6FDCD7F724257C0C /* secondViewTab.swift */; };
+		C14203965C17D199896FD179 /* searchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1420793CBC46D713639F0F8 /* searchBar.swift */; };
+		C142044BC1B0CB69240A53B0 /* allNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1420C0F845FE53E2EAA2624 /* allNews.swift */; };
+		C1420671A122B3B10C0D7EF8 /* firstViewTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14207E165CAC878E7599A93 /* firstViewTab.swift */; };
+		C1420E657C474F23C94FC94D /* thirdViewTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1420DE43198B5CEE429CCD6 /* thirdViewTab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,12 @@
 		4D5FC7C5248B015D00A10091 /* NewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5FC7C9248B015E00A10091 /* NewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTests.swift; sourceTree = "<group>"; };
 		4D5FC7CB248B015E00A10091 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DA47B37248EA79F00A42CD3 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
+		C1420793CBC46D713639F0F8 /* searchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchBar.swift; sourceTree = "<group>"; };
+		C14207E165CAC878E7599A93 /* firstViewTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = firstViewTab.swift; sourceTree = "<group>"; };
+		C1420C0F845FE53E2EAA2624 /* allNews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allNews.swift; sourceTree = "<group>"; };
+		C1420DE43198B5CEE429CCD6 /* thirdViewTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = thirdViewTab.swift; sourceTree = "<group>"; };
+		C1420E2D6FDCD7F724257C0C /* secondViewTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = secondViewTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +98,12 @@
 				4D5FC7BD248B015D00A10091 /* LaunchScreen.storyboard */,
 				4D5FC7C0248B015D00A10091 /* Info.plist */,
 				4D5FC7BA248B015D00A10091 /* Preview Content */,
+				C14207E165CAC878E7599A93 /* firstViewTab.swift */,
+				C1420E2D6FDCD7F724257C0C /* secondViewTab.swift */,
+				C1420DE43198B5CEE429CCD6 /* thirdViewTab.swift */,
+				C1420C0F845FE53E2EAA2624 /* allNews.swift */,
+				C1420793CBC46D713639F0F8 /* searchBar.swift */,
+				4DA47B37248EA79F00A42CD3 /* AsyncImage.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -209,8 +227,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D5FC7B3248B015B00A10091 /* AppDelegate.swift in Sources */,
+				4DA47B38248EA79F00A42CD3 /* AsyncImage.swift in Sources */,
 				4D5FC7B5248B015B00A10091 /* SceneDelegate.swift in Sources */,
 				4D5FC7B7248B015B00A10091 /* ContentView.swift in Sources */,
+				C1420671A122B3B10C0D7EF8 /* firstViewTab.swift in Sources */,
+				C14203914CB6F324C954D204 /* secondViewTab.swift in Sources */,
+				C1420E657C474F23C94FC94D /* thirdViewTab.swift in Sources */,
+				C142044BC1B0CB69240A53B0 /* allNews.swift in Sources */,
+				C14203965C17D199896FD179 /* searchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
