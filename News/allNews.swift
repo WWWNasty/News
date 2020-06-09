@@ -7,14 +7,17 @@ import SwiftUI
 import Foundation
 
 struct AllNews: View {
+    @Environment(\.imageCache) var cache: ImageCache
+    var  url = URL(string:"https://www.valuewalk.com/wp-content/uploads/2017/05/whitney-tilson-family-22.jpg")!
+
     var news: [NewsData]
 
     var body: some View {
         NavigationView {
             VStack {
-                List(news) { news in
+                List(news) { (newsData:NewsData) in
                     VStack {
-                        NewsList(title: news.name, description: news.description)
+                        NewsList(title: newsData.name, description: newsData.description, cache: self.cache, url: self.url)
                     }
                 }
             }
@@ -38,10 +41,18 @@ struct allFavouriteNewsPreviews: PreviewProvider {
 
 //вьюшка
 struct NewsList: View {
+    private var image: AsyncImage<Text>
+
+    init(title: String, description: String, cache: ImageCache, url: URL) {
+        self.title = title
+        self.description = description
+        self.image = AsyncImage(url: url, placeholder: Text("fich"), cache: cache);
+    }
+
     var title: String = "News!"
     var description: String = "Description"
 
-    var image = AsyncImage(url: URL(string: "https://www.newsbtc.com/wp-content/uploads/2020/06/bitcoin-crypto-traders-shutterstock_1084365701-1-860x570.jpg")!, placeholder: Text("fich"))
+
 
     var body: some View {
         //card!!!!!!!!!!
@@ -55,7 +66,8 @@ struct NewsList: View {
 
 
         }.background(image)
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, alignment: .center).border(Color.gray, width: 2).cornerRadius(20)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, alignment: .center)
+            .cornerRadius(20)
 
 
     }

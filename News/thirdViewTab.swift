@@ -9,23 +9,23 @@ struct SearchInAllNews: View {
     @State private var search = ""
     var news: [NewsData]
 
+    @Environment(\.imageCache) var cache: ImageCache
+    var  url = URL(string: "https://www.newsbtc.com/wp-content/uploads/2020/06/bitcoin-crypto-traders-shutterstock_1084365701-1-860x570.jpg")!
+
+
     var body: some View {
+        NavigationView{
         VStack {
             SearchBar(text: $search)
-            
-            List(news.filter { data in data.name.localizedCaseInsensitiveContains(self.search) || data.description.localizedCaseInsensitiveContains(self.search) }) { (news: NewsData) in   //filter!!!!!!!!!
+
+            List(news.filter { data in data.name.localizedCaseInsensitiveContains(self.search) ||
+                    data.description.localizedCaseInsensitiveContains(self.search) }) { (news: NewsData) in   //filter!!!!!!!!!
                 VStack {
-                    NewsList(title: news.name, description: news.description)
-//                    .filter {self.search.isEmpty ? true: $0.localizedCaseInsensitiveContains(self.search)}
-//
-//                    news.filter { oneNews in
-//                        list.name.contains { name in
-//                            name.localizedCaseInsensitiveContains(self.search)
-                     //   }
+                    NewsList(title: news.name, description: news.description, cache: self.cache, url: self.url	)
                 }
-                //NewsList(title: news.name, description: news.description)
             }
         }.navigationBarTitle("Search")
+    }
     }
 }
 
@@ -34,3 +34,4 @@ struct thirdViewTab_Previews: PreviewProvider {
         ContentView()
     }
 }
+

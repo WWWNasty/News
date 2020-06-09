@@ -11,10 +11,14 @@ struct AllNewsChannels: View {
     var body: some View {
         NavigationView {
             VStack {
+                
                 List(channels) { channel in
+                    
                     VStack {
                         NewsChannel(title: channel.name, description: channel.description)
+                
                     }
+                        
                 }
             }.navigationBarTitle("List channels")
         }
@@ -29,15 +33,21 @@ struct firstViewTab_Previews: PreviewProvider {
 
 //вьюшка
 struct NewsChannel: View {
-    var title: String = "News channel!"
-    var description: String = "Description"
+    var title: String
+    var description: String
 
     var body: some View {
+        HStack {
         VStack {
-            //star!!!!!!!!
+            //star!!!!!!!
             Text(title).bold()
             Text(description)
         }
+            Spacer()
+            Image(systemName: "star").font(.system(size: 16, weight: .regular))
+            Image(systemName: "star.fill").font(.system(size: 16, weight: .regular))
+        }
+        
     }
 }
 

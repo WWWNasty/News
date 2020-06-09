@@ -14,8 +14,8 @@ struct AsyncImage<Placeholder: View>: View {
     @ObservedObject private var loader: ImageLoader
     private let placeholder: Placeholder?
 
-    init(url: URL, placeholder: Placeholder? = nil) {
-        loader = ImageLoader(url: url)
+    init(url: URL, placeholder: Placeholder? = nil, cache: ImageCache? = nil) {
+        loader = ImageLoader(url: url, cache: cache)
         self.placeholder = placeholder
     }
 
@@ -52,18 +52,35 @@ class ImageLoader: ObservableObject {
         cancellable?.cancel()
     }
 
+    private var cache: ImageCache?
+
+    init(url: URL, cache: ImageCache? = nil) {
+        self.url = url
+        self.cache = cache
+    }
+
     func load() {
+        if let image = cache?[url] {
+            self.image = image
+            return
+        }
+
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
-                .map {
-                    UIImage(data: $0.data)
-                }
+                .map { UIImage(data: $0.data) }
                 .replaceError(with: nil)
+                .handleEvents(receiveOutput: { [weak self] in self?.cache($0) })
                 .receive(on: DispatchQueue.main)
                 .assign(to: \.image, on: self)
+    }
+
+    private func cache(_ image: UIImage?) {
+        image.map { cache?[url] = $0 }
     }
 
     func cancel() {
         cancellable?.cancel()
     }
+
+
 }
 

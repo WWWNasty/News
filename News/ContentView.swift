@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selection = 3
+
+    @State private var selection = 2
 
     var fakeDataNews = [
         NewsData(id: 1, name: "H", description: "news"),
@@ -74,8 +75,6 @@ struct ContentView: View {
                         }
                     }
                     .tag(2)
-
-
         }
     }
 }
