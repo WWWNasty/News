@@ -15,7 +15,7 @@ struct SearchBar: UIViewRepresentable{
             _text = text
         }
 
-        private func searchBar(_ searchBar: UISearchBar, imageDidChange
+        func searchBar(_ searchBar: UISearchBar, textDidChange
         searchText: String){
             text = searchText
         }

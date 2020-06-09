@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selection = 2
+    @State private var selection = 3
 
     var fakeDataNews = [
         NewsData(id: 1, name: "H", description: "news"),
@@ -50,6 +50,7 @@ struct ContentView: View {
             //первая таба
             AllNewsChannels(channels: fakeData).tabItem {
                         VStack {
+
                             Image(systemName: "list.dash").font(.system(size: 16, weight: .black))
                             Text("All channels")
                         }
