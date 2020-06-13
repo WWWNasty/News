@@ -7,12 +7,12 @@ import Foundation
 
 struct ArticleList: View{
     @State var articles: [Article] = []
-
+    var search = ""
     var body: some View{
         List(articles) { (article: Article) in
             Text(article.description)
         }.onAppear {
-                    Api().getArticles{ (articles) in
+                    Api().getArticles(searchString: self.search){ (articles) in
                         self.articles = articles
                     }
                 }

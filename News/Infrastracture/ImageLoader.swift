@@ -1,42 +1,10 @@
 //
-//  AsyncImage.swift
-//  News
+// Created by Настя on 11.06.2020.
+// Copyright (c) 2020 Настя. All rights reserved.
 //
-//  Created by Настя on 08.06.2020.
-//  Copyright © 2020 Настя. All rights reserved.
-//
-
-import Foundation
 import SwiftUI
+import Foundation
 import Combine
-
-struct AsyncImage<Placeholder: View>: View {
-    @ObservedObject private var loader: ImageLoader
-    private let placeholder: Placeholder?
-
-    init(url: URL, placeholder: Placeholder? = nil, cache: ImageCache? = nil) {
-        loader = ImageLoader(url: url, cache: cache)
-        self.placeholder = placeholder
-    }
-
-    var body: some View {
-        image
-                .onAppear(perform: loader.load)
-                .onDisappear(perform: loader.cancel)
-    }
-
-    private var image: some View {
-        Group {
-            if loader.image != nil {
-                Image(uiImage: loader.image!)
-                
-            } else {
-                placeholder
-            }
-        }
-    }
-}
-
 
 class ImageLoader: ObservableObject {
     @Published var image: UIImage?
@@ -83,4 +51,3 @@ class ImageLoader: ObservableObject {
 
 
 }
-
