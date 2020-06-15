@@ -12,21 +12,21 @@ struct ContentView: View {
 
     @State private var selection = 0
     @State var articles: [Article] = []
+    @State var channels: [SourceChannel] = []
 
 
     var body: some View {
 
         TabView(selection: $selection) {
 
-//            //первая таба
-//            AllNewsChannels(channels: fakeData).tabItem {
-//                        VStack {
-//
-//                            Image(systemName: "list.dash").font(.system(size: 16, weight: .black))
-//                            Text("All channels")
-//                        }
-//                    }
-//                    .tag(0)
+            //первая таба
+            AllNewsChannels(channels: channels).tabItem {
+                        VStack {
+                            Image(systemName: "list.dash").font(.system(size: 16, weight: .black))
+                            Text("All channels")
+                        }
+                    }
+                    .tag(0)
 
 //            //второй таб
 //            FavouritesNewsChannels(channels: fakeData).tabItem {
@@ -44,16 +44,9 @@ struct ContentView: View {
                             Text("Search news")
                         }
                     }
-                    .tag(0)
+                    .tag(1)
             
-            ArticleList().tabItem {
-                                   VStack {
 
-                                       Image(systemName: "list.dash").font(.system(size: 16, weight: .black))
-                                       Text("All channels")
-                                   }
-                               }
-                               .tag(1)
         }
     }
 }

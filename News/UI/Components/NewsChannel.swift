@@ -24,10 +24,4 @@ struct NewsChannel: View {
     }
 }
 
-//данные вьюшки вынести
-struct Channel: Identifiable {
-    var id: Int
-    var name: String
-    var description: String
-}
 

@@ -22,4 +22,16 @@ class Api {
                 }
                 .resume()
     }
+
+    func getChannels(completion: @escaping ([SourceChannel]) -> ()){
+        guard let urlChannels = URL(string: "https://newsapi.org/v2/sources?apiKey=\(key)") else {
+            return
+        }
+        URLSession.shared.dataTask(with: urlChannels) { (data, _, _) in
+                    let channelAPIResponse = try! JSONDecoder().decode(ChannelsAPIResponse.self, from: data!)
+                    DispatchQueue.main.async {
+                        completion(channelAPIResponse.sources)
+                    }                }
+                .resume()
+    }
 }

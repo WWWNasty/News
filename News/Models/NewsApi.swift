@@ -6,14 +6,14 @@
 import Foundation
 import SwiftUI
 
-struct Source: Codable {
+struct SourceArticle: Codable {
     var id: String?
     var name: String
 }
 
 struct Article: Codable, Identifiable {
     var id: String
-    var source: Source
+    var source: SourceArticle
     var title: String
     var description: String
     var urlToImage: String?
@@ -30,4 +30,21 @@ struct NewsAPIResponse: Codable {
     var status: String
     var totalResults: Int
     var articles: [Article]
+}
+
+struct SourceChannel:Codable, Identifiable{
+    var id: String
+    var name: String
+    var description: String
+
+    enum CodingKeys: String, CodingKey {
+        case name, description
+        //for id field "url" will be taken
+        case id = "url"
+    }
+}
+
+struct ChannelsAPIResponse: Codable {
+    var status: String
+    var sources: [SourceChannel]
 }

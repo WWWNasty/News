@@ -22,8 +22,8 @@ struct NewsList: View {
 
         self.image = AsyncImage(url: imageUrl!, placeholder: Text("fich"), cache: cache)
     }
-    var title: String = "News!"
-    var description: String = "Description"
+    var title: String
+    var description: String
 
 
 
