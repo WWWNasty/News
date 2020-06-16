@@ -40,8 +40,8 @@ struct NewsChannel: View {
                     print(error.localizedDescription)
                 }
 
-
             }){
+                //TODO on change
                 if(isFavourite){
                     Image(systemName: "star.fill").font(.system(size: 16, weight: .regular))
                 }
