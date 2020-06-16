@@ -8,7 +8,7 @@ import Foundation
 
 struct SearchInAllNews: View {
     @State private var search = ""
-    @State var articles: [Article] = []
+    @State var articles: [ArticleAPIResponse] = []
 
     @Environment(\.imageCache) var cache: ImageCache
 
@@ -23,7 +23,7 @@ struct SearchInAllNews: View {
                     }
                 })
 
-                List(articles) { (article: Article) in
+                List(articles) { (article: ArticleAPIResponse) in
                     NewsList(title: article.title, description: article.description, cache: self.cache, urlToImage: article.urlToImage)
                 }
             }.navigationBarTitle("Search")

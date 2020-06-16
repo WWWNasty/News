@@ -11,7 +11,7 @@ struct SourceArticle: Codable {
     var name: String
 }
 
-struct Article: Codable, Identifiable {
+struct ArticleAPIResponse: Codable, Identifiable {
     var id: String
     var source: SourceArticle
     var title: String
@@ -29,7 +29,7 @@ struct Article: Codable, Identifiable {
 struct NewsAPIResponse: Codable {
     var status: String
     var totalResults: Int
-    var articles: [Article]
+    var articles: [ArticleAPIResponse]
 }
 
 struct SourceChannel:Codable, Identifiable{

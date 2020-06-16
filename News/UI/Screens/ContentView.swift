@@ -11,9 +11,8 @@ import SwiftUI
 struct ContentView: View {
 
     @State private var selection = 0
-    @State var articles: [Article] = []
+    @State var articles: [ArticleAPIResponse] = []
     @State var channels: [SourceChannel] = []
-
 
     var body: some View {
 

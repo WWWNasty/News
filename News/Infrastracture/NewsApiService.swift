@@ -9,7 +9,7 @@ import SwiftUI
 class Api {
     var key = "8fcacb54503448489324371c70936f9c"
 
-    func getArticles(searchString: String, completion: @escaping ([Article]) -> ()) {
+    func getArticles(searchString: String, completion: @escaping ([ArticleAPIResponse]) -> ()) {
         guard let url = URL(string: "https://newsapi.org/v2/everything?q=\(searchString)&apiKey=\(key)") else {
             return
         }
