@@ -7,9 +7,9 @@ import Foundation
 
 class Channel: Object {
     @objc dynamic var id = ""
-    @objc dynamic var name = ""
-    @objc dynamic var descriptionChannel = ""
-    @objc dynamic var isFavourite = true
+//    @objc dynamic var name = ""
+//    @objc dynamic var descriptionChannel = ""
+//    @objc dynamic var isFavourite = true
 }
 
 class Article: Object {

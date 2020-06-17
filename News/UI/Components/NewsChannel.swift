@@ -26,15 +26,24 @@ struct NewsChannel: View {
                 do{
                     let realm = try Realm(configuration: config)
                     let newData = Channel()
-                    newData.isFavourite = self.isFavourite
-                    newData.id = self.id
-                    newData.name = self.title
-                    newData.descriptionChannel = self.description
+                    let channel = realm.objects(Channel.self).filter("id = '\(self.id)'")
 
-                    try realm.write({
-                        realm.add(newData)
-                        print("success")
-                    })
+                    if (self.isFavourite){
+                            try! realm.write {
+                                realm.delete(channel)
+                            }
+                    } else {
+
+                            newData.id = self.id
+//                        newData.isFavourite = true
+//                            newData.name = self.title
+//                            newData.descriptionChannel = self.description
+
+                            try realm.write({
+                                realm.add(newData)
+                                print("success")
+                            })
+                        }
                 }
                 catch{
                     print(error.localizedDescription)

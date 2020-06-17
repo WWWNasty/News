@@ -14,6 +14,7 @@ struct ContentView: View {
     @State var articles: [ArticleAPIResponse] = []
     @State var channels: [SourceChannel] = []
 
+
     var body: some View {
 
         TabView(selection: $selection) {
@@ -27,14 +28,14 @@ struct ContentView: View {
                     }
                     .tag(0)
 
-//            //второй таб
-//            FavouritesNewsChannels(channels: fakeData).tabItem {
-//                        VStack {
-//                            Image(systemName: "star.fill").font(.system(size: 16, weight: .black))
-//                            Text("Favourite channels")
-//                        }
-//                    }
-//                    .tag(1)
+            //второй таб
+            FavouritesNewsChannels(channels: channels).tabItem {
+                        VStack {
+                            Image(systemName: "star.fill").font(.system(size: 16, weight: .black))
+                            Text("Favourite channels")
+                        }
+                    }
+                    .tag(1)
 
             //третья таба
             SearchInAllNews(articles: articles).tabItem {
@@ -43,7 +44,7 @@ struct ContentView: View {
                             Text("Search news")
                         }
                     }
-                    .tag(1)
+                    .tag(2)
             
 
         }
