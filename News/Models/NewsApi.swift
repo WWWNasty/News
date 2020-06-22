@@ -23,7 +23,6 @@ struct ArticleAPIResponse: Codable, Identifiable {
         //for id field "url" will be taken
         case id = "url"
     }
-    //var publishedAt:
 }
 
 struct NewsAPIResponse: Codable {

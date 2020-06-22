@@ -5,16 +5,9 @@
 import RealmSwift
 import Foundation
 
-class Channel: Object {
+class Channel: Object, Identifiable {
     @objc dynamic var id = ""
-//    @objc dynamic var name = ""
-//    @objc dynamic var descriptionChannel = ""
-//    @objc dynamic var isFavourite = true
+    @objc dynamic var name = ""
+    @objc dynamic var descriptionChannel = ""
 }
 
-class Article: Object {
-    @objc dynamic var id = ""
-    @objc dynamic var title = ""
-    @objc dynamic var descriptionArticle = ""
-    //@objc dynamic var urlToImage: String?
-}

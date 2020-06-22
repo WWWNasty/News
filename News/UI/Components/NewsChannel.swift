@@ -16,7 +16,6 @@ struct NewsChannel: View {
     var body: some View {
         HStack {
             VStack {
-                //star!!!!!!!
                 Text(title).bold()
                 Text(description)
             }
@@ -28,17 +27,15 @@ struct NewsChannel: View {
                     let newData = Channel()
                     let channel = realm.objects(Channel.self).filter("id = '\(self.id)'")
 
-                    if (self.isFavourite){
+                    if self.isFavourite {
                             try! realm.write {
                                 realm.delete(channel)
                             }
                     } else {
-
-                            newData.id = self.id
-//                        newData.isFavourite = true
-//                            newData.name = self.title
-//                            newData.descriptionChannel = self.description
-
+                        newData.id = self.id.replacingOccurrences(of: "https://", with: "")
+                                .replacingOccurrences(of: "http://", with: "")
+                        newData.descriptionChannel = self.description
+                        newData.name = self.title
                             try realm.write({
                                 realm.add(newData)
                                 print("success")
@@ -48,18 +45,16 @@ struct NewsChannel: View {
                 catch{
                     print(error.localizedDescription)
                 }
-
+                self.isFavourite.toggle()
             }){
-                //TODO on change
-                if(isFavourite){
+                if isFavourite{
                     Image(systemName: "star.fill").font(.system(size: 16, weight: .regular))
                 }
-                else{
+                else {
                     Image(systemName: "star").font(.system(size: 16, weight: .regular))
                 }
             }
         }
-
     }
 }
 

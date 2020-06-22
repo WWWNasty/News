@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State private var selection = 0
+    @State private var selection = 2
     @State var articles: [ArticleAPIResponse] = []
     @State var channels: [SourceChannel] = []
 
@@ -29,7 +29,7 @@ struct ContentView: View {
                     .tag(0)
 
             //второй таб
-            FavouritesNewsChannels(channels: channels).tabItem {
+            FavouritesNewsChannels().tabItem {
                         VStack {
                             Image(systemName: "star.fill").font(.system(size: 16, weight: .black))
                             Text("Favourite channels")

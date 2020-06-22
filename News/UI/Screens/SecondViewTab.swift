@@ -2,44 +2,45 @@
 // Created by Настя on 07.06.2020.
 // Copyright (c) 2020 Настя. All rights reserved.
 //
+
 import RealmSwift
 import SwiftUI
 import UIKit
 import Foundation
 
 struct FavouritesNewsChannels: View {
-    @State var favouriteChannels: Results<Channel>?
-    @State var channels: [SourceChannel]
+    @State var favouriteChannels: [Channel] = []
+    @State var articles: [ArticleAPIResponse] = []
+
 
     var body: some View {
         NavigationView {
 
             VStack {
-//                NavigationLink(destination: AllNews(news: channels)) {
-//                             Text("News")
-//                         }
-                List(channels.filter { channel in self.favouriteChannels?.contains { favouriteChannel in
-                    channel.id == favouriteChannel.id
-                } ?? false }) { channel in
+                NavigationLink(destination: AllNews(articles: self.articles)) {
+                    Text("News")
+                }
+
+                List(favouriteChannels) { channel in
                     VStack {
-                        NewsChannel(isFavourite: true, title: channel.name, description: channel.description, id: channel.id)
+                        NewsChannel(isFavourite: true, title: channel.name, description: channel.descriptionChannel, id: channel.id)
                     }
                 }
-                        .onAppear(){
+                        .onAppear() {
 
-                            Api().getChannels() { (channels) in
-                                self.channels = channels
-                            }
-                            let config = Realm.Configuration(schemaVersion :1)
+//                            Api().getFavouriteChannels() { (channels) in
+//                                self.channels = channels
+//                            }
+                            let config = Realm.Configuration(schemaVersion: 1)
                             do {
                                 let realm = try Realm(configuration: config)
-                                self.favouriteChannels = realm.objects(Channel.self)
-                            }
-                            catch{
+                                self.favouriteChannels = Array(realm.objects(Channel.self))
+                            } catch {
                                 print(error.localizedDescription)
                             }
-
                         }
+
+
             }.navigationBarTitle("Favourite channels")
         }
     }
