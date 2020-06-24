@@ -23,21 +23,12 @@ struct FavouritesNewsChannels: View {
 
                 List(favouriteChannels) { channel in
                     VStack {
-                        NewsChannel(isFavourite: true, title: channel.name, description: channel.descriptionChannel, id: channel.id)
+                        NewsChannel(isFavourite: true, title: channel.name, description: channel.descriptionChannel, id: channel.id, urlToSource: channel.urlToSource)
                     }
                 }
                         .onAppear() {
+                            self.favouriteChannels = ChannelService().getFavouriteChannels()
 
-//                            Api().getFavouriteChannels() { (channels) in
-//                                self.channels = channels
-//                            }
-                            let config = Realm.Configuration(schemaVersion: 1)
-                            do {
-                                let realm = try Realm(configuration: config)
-                                self.favouriteChannels = Array(realm.objects(Channel.self))
-                            } catch {
-                                print(error.localizedDescription)
-                            }
                         }
 
 

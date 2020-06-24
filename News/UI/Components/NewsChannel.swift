@@ -12,6 +12,7 @@ struct NewsChannel: View {
     var title: String
     var description: String
     var id: String
+    var urlToSource: String
 
     var body: some View {
         HStack {
@@ -20,32 +21,10 @@ struct NewsChannel: View {
                 Text(description)
             }
             Spacer()
-            Button(action:{
-                let config = Realm.Configuration(schemaVersion :1)
-                do{
-                    let realm = try Realm(configuration: config)
-                    let newData = Channel()
-                    let channel = realm.objects(Channel.self).filter("id = '\(self.id)'")
 
-                    if self.isFavourite {
-                            try! realm.write {
-                                realm.delete(channel)
-                            }
-                    } else {
-                        newData.id = self.id.replacingOccurrences(of: "https://", with: "")
-                                .replacingOccurrences(of: "http://", with: "")
-                        newData.descriptionChannel = self.description
-                        newData.name = self.title
-                            try realm.write({
-                                realm.add(newData)
-                                print("success")
-                            })
-                        }
-                }
-                catch{
-                    print(error.localizedDescription)
-                }
-                self.isFavourite.toggle()
+            Button(action:{
+                ChannelService().makeFavourite(title: self.title, description: self.description, id: self.id, urlToSource: self.urlToSource, isFavourite: &self.isFavourite)
+
             }){
                 if isFavourite{
                     Image(systemName: "star.fill").font(.system(size: 16, weight: .regular))

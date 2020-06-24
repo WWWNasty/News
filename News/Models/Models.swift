@@ -9,5 +9,6 @@ class Channel: Object, Identifiable {
     @objc dynamic var id = ""
     @objc dynamic var name = ""
     @objc dynamic var descriptionChannel = ""
+    @objc dynamic var urlToSource = ""
 }
 

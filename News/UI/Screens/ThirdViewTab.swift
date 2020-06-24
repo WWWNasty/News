@@ -16,7 +16,7 @@ struct SearchInAllNews: View {
         NavigationView {
             VStack {
                 SearchBar(text: $search, onChangeFunction: { (text: String) in
-                    if (!self.search.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
+                    if (!self.search.isEmpty) {
                         Api().getArticles(searchString: self.search) { (articles) in
                             self.articles = articles
                         }

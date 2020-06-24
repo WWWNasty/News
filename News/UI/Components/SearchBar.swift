@@ -36,7 +36,7 @@ struct SearchBar: UIViewRepresentable{
 
     func updateUIView(_ uiView: UISearchBar, context:
             UIViewRepresentableContext<SearchBar>) {
-        uiView.text = text
+        uiView.text = text.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
 }

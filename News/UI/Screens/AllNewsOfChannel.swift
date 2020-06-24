@@ -19,20 +19,22 @@ struct AllNews: View {
                         NewsList(title: article.title, description: article.description, cache: self.cache, urlToImage: article.urlToImage)
                     }
                 }.onAppear() {
-
-
-                    let config = Realm.Configuration(schemaVersion: 1)
-                    do {
-                        let realm = try Realm(configuration: config)
-                        let channelsDomains = realm.objects(Channel.self).map { channel in
-                            channel.id
-                        }.joined(separator: ",")
-                        Api().getFavouriteArticles(domains: channelsDomains) { (articles) in
-                            self.articles = articles
-                        }
-                    } catch {
-                        print(error.localizedDescription)
+                    ArticleService().getAllFavouriteArticles {
+                        (articles) in self.articles = articles
                     }
+
+//                    let config = Realm.Configuration(schemaVersion: 1)
+//                    do {
+//                        let realm = try Realm(configuration: config)
+//                        let channelsDomains = realm.objects(Channel.self).map { channel in
+//                            channel.id
+//                        }.joined(separator: ",")
+//                        Api().getFavouriteArticles(domains: channelsDomains) { (articles) in
+//                            self.articles = articles
+//                        }
+//                    } catch {
+//                        print(error.localizedDescription)
+//                    }
                 }
             }
         }.navigationBarTitle("List all news")

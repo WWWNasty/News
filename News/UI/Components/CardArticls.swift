@@ -7,17 +7,13 @@ import Foundation
 
 struct NewsList: View {
     private var image: AsyncImage<Text>
-    var imageDefault = "https://mondrian.mashable.com/2020%252F05%252F16%252Fed%252F65127486efd14faea068927124f3b1ee.253ab.jpg%252F1200x630.jpg?signature=XjJ4aqKaX56MW5k29Zn1ygz0Evc="
 
     init(title: String, description: String, cache: ImageCache, urlToImage: String?) {
         self.title = title
         self.description = description
-        var imageUrl = urlToImage;
+        let imageDefault = "https://mondrian.mashable.com/2020%252F05%252F16%252Fed%252F65127486efd14faea068927124f3b1ee.253ab.jpg%252F1200x630.jpg?signature=XjJ4aqKaX56MW5k29Zn1ygz0Evc="
 
-        if(imageUrl == nil || imageUrl!.isEmpty) {
-            imageUrl = self.imageDefault;
-        }
-        self.image = AsyncImage(url: imageUrl!, placeholder: Text("loading"), cache: cache)
+        self.image = AsyncImage(url: urlToImage, placeholder: Text("loading"), cache: cache, imageDefault: imageDefault)
     }
 
     var title: String

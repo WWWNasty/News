@@ -10,10 +10,6 @@ class ImageLoader: ObservableObject {
     @Published var image: UIImage?
     private let url: URL
 
-    init(url: URL) {
-        self.url = url
-    }
-
     private var cancellable: AnyCancellable?
 
     deinit {
@@ -22,8 +18,9 @@ class ImageLoader: ObservableObject {
 
     private var cache: ImageCache?
 
-    init(url: URL, cache: ImageCache? = nil) {
-        self.url = url
+    init(url: String, cache: ImageCache? = nil) {
+        //TODO try catch
+        self.url = URL(string: url)!
         self.cache = cache
     }
 

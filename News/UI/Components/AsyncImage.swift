@@ -14,11 +14,15 @@ struct AsyncImage<Placeholder: View>: View {
     @ObservedObject private var loader: ImageLoader
     private let placeholder: Placeholder?
 
-    init(url: String, placeholder: Placeholder? = nil, cache: ImageCache? = nil) {
-        //todo try catch URL
+    init(url: String?, placeholder: Placeholder? = nil, cache: ImageCache? = nil, imageDefault: String) {
+        var urlToImage = url
+        //TODO codding url
+        // var urlToImage = url?.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]{} ").inverted)
 
-        // url.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)! кодирует строку адреса с помощью % в соответсвии стандарту URL
-        loader = ImageLoader(url: URL(string: url)!, cache: cache)
+        if(urlToImage == nil || urlToImage!.isEmpty) {
+            urlToImage = imageDefault
+        }
+        loader = ImageLoader(url: urlToImage!, cache: cache)
         self.placeholder = placeholder
     }
 
