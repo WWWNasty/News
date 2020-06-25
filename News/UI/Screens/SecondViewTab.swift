@@ -9,9 +9,9 @@ import UIKit
 import Foundation
 
 struct FavouritesNewsChannels: View {
-    @State var favouriteChannels: [Channel] = []
     @State var articles: [ArticleAPIResponse] = []
 
+    @State var favoriteChannels: [ChannelViewModel] = []
 
     var body: some View {
         NavigationView {
@@ -21,18 +21,14 @@ struct FavouritesNewsChannels: View {
                     Text("News")
                 }
 
-                List(favouriteChannels) { channel in
+                List(favoriteChannels) { channel in
                     VStack {
                         NewsChannel(isFavourite: true, title: channel.name, description: channel.descriptionChannel, id: channel.id, urlToSource: channel.urlToSource)
                     }
                 }
-                        .onAppear() {
-                            self.favouriteChannels = ChannelService().getFavouriteChannels()
-
-                        }
-
-
             }.navigationBarTitle("Favourite channels")
+        }.onAppear {
+            self.favoriteChannels = ChannelService(realmService: RealmService()).getFavoriteChannels()
         }
     }
 }

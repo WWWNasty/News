@@ -8,30 +8,25 @@ import SwiftUI
 import Foundation
 
 struct AllNewsChannels: View {
-    @State var channels: [SourceChannel]
-    @State var favouriteChannels: Results<Channel>?
-
+    //@State var favouriteChannels: Results<Channel>
+    @State var channels: [SourceChannel] = []
+    @State var favoriteChannels: [ChannelViewModel] = []
 
     var body: some View {
         NavigationView {
             VStack {
-
                 List(channels) { channel in
-
-                    NewsChannel(isFavourite: self.favouriteChannels?.contains { favouriteChannel in
-                        //todo change to id
+                    NewsChannel(isFavourite: self.favoriteChannels.contains { favouriteChannel in
                         channel.id == favouriteChannel.urlToSource
-                    } ?? false, title: channel.name, description: channel.description, id: channel.id, urlToSource: channel.id)
-
-                }.onAppear() {
-                    self.favouriteChannels = ChannelService().getAllChannels {
-                        channels in
-                        self.channels = channels
-                    }
+                    }, title: channel.name, description: channel.description, id: channel.id, urlToSource: channel.id)
 
                 }
             }.navigationBarTitle("Channels")
         }
+                .onAppear{
+            Api().getChannels { channels in self.channels = channels }
+            self.favoriteChannels = ChannelService(realmService: RealmService()).getFavoriteChannels()
+                }
     }
 }
 

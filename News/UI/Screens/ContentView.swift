@@ -12,7 +12,6 @@ struct ContentView: View {
 
     @State private var selection = 2
     @State var articles: [ArticleAPIResponse] = []
-    @State var channels: [SourceChannel] = []
 
 
     var body: some View {
@@ -20,7 +19,7 @@ struct ContentView: View {
         TabView(selection: $selection) {
 
             //первая таба
-            AllNewsChannels(channels: channels).tabItem {
+            AllNewsChannels().tabItem {
                         VStack {
                             Image(systemName: "list.dash").font(.system(size: 16, weight: .black))
                             Text("All channels")
@@ -38,7 +37,7 @@ struct ContentView: View {
                     .tag(1)
 
             //третья таба
-            SearchInAllNews(articles: articles).tabItem {
+            SearchInAllNews().tabItem {
                         VStack {
                             Image(systemName: "magnifyingglass").font(.system(size: 16, weight: .black))
                             Text("Search news")

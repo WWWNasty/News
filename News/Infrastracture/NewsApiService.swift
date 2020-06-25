@@ -69,8 +69,6 @@ class Api {
                 .resume()
     }
 
-    // новости из нескольких доменов https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=8f
-
     func getChannels(completion: @escaping ([SourceChannel]) -> ()) {
 
         guard let urlChannels = URL(string: "https://newsapi.org/v2/sources?apiKey=\(key)") else {

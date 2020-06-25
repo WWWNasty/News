@@ -23,7 +23,7 @@ struct NewsChannel: View {
             Spacer()
 
             Button(action:{
-                ChannelService().makeFavourite(title: self.title, description: self.description, id: self.id, urlToSource: self.urlToSource, isFavourite: &self.isFavourite)
+                ChannelService(realmService: RealmService()).makeFavourite(title: self.title, description: self.description, id: self.id, urlToSource: self.urlToSource, isFavourite: &self.isFavourite)
 
             }){
                 if isFavourite{
