@@ -6,12 +6,43 @@
 import Foundation
 import SwiftUI
 
-struct SourceArticle: Codable {
+struct SourceArticle: Codable, Equatable {
+
+    static func ==(lhs: SourceArticle, rhs: SourceArticle) -> Bool {
+        if lhs.id != rhs.id {
+            return false
+        }
+        if lhs.name != rhs.name {
+            return false
+        }
+        return true
+    }
+
     var id: String?
     var name: String
 }
 
-struct ArticleAPIResponse: Codable, Identifiable {
+struct ArticleAPIResponse: Codable, Identifiable, Equatable {
+
+    static func ==(lhs: ArticleAPIResponse, rhs: ArticleAPIResponse) -> Bool {
+        if lhs.id != rhs.id {
+            return false
+        }
+        if lhs.source != rhs.source {
+            return false
+        }
+        if lhs.title != rhs.title {
+            return false
+        }
+        if lhs.description != rhs.description {
+            return false
+        }
+        if lhs.urlToImage != rhs.urlToImage {
+            return false
+        }
+        return true
+    }
+
     var id: String
     var source: SourceArticle
     var title: String

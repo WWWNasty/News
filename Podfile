@@ -13,6 +13,7 @@ target 'News' do
     inherit! :search_paths
     # Pods for testing
     pod 'RealmSwift'
+    pod 'Swinject'
 
   end
 

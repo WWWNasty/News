@@ -7,11 +7,19 @@ import Foundation
 
 class ArticleService{
 
+    let channelRepository: ChannelRepository
+    let api: NewsApiService
+
+    init(realmService: ChannelRepository, api: NewsApiService){
+        self.api = api
+        self.channelRepository = realmService;
+    }
+
     func getAllFavouriteArticles(allArticles: @escaping ([ArticleAPIResponse]) -> ()) {
-        let channelsDomains = RealmService().getAll().map { channel in
+        let channelsDomains = channelRepository.getAll().map { channel in
             channel.id
         }.joined(separator: ",")
-        Api().getFavouriteArticles(domains: channelsDomains, completion: allArticles)
+        api.getFavouriteArticles(domains: channelsDomains, completion: allArticles)
 
     }
 

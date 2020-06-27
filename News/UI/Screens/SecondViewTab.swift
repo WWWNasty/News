@@ -28,7 +28,7 @@ struct FavouritesNewsChannels: View {
                 }
             }.navigationBarTitle("Favourite channels")
         }.onAppear {
-            self.favoriteChannels = ChannelService(realmService: RealmService()).getFavoriteChannels()
+            self.favoriteChannels = ChannelService(realmService: ChannelRepository(realm: try! Realm())).getFavoriteChannels()
         }
     }
 }

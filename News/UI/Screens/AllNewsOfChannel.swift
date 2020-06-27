@@ -19,7 +19,7 @@ struct AllNews: View {
                         NewsList(title: article.title, description: article.description, cache: self.cache, urlToImage: article.urlToImage)
                     }
                 }.onAppear() {
-                    ArticleService().getAllFavouriteArticles {
+                    ArticleService(realmService: ChannelRepository(realm: try! Realm()), api: NewsApiService()).getAllFavouriteArticles {
                         (articles) in self.articles = articles
                     }
 

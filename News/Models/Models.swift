@@ -12,5 +12,9 @@ class Channel: Object, Identifiable {
     @objc dynamic var descriptionChannel = ""
     @objc dynamic var urlToSource = ""
 
+    convenience init(initializer: (Channel) -> ()) {
+        self.init()
+        initializer(self)
+    }
 }
 

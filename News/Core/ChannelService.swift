@@ -7,24 +7,28 @@ import Foundation
 
 class ChannelService {
 
-    let realmService: RealmService
+    let channelRepository: ChannelRepository
 
-    init(realmService: RealmService){
-        self.realmService = realmService;
+    init(realmService: ChannelRepository){
+        self.channelRepository = realmService
     }
 
     func makeFavourite(title: String, description: String, id: String, urlToSource: String, isFavourite: inout Bool) {
         if isFavourite {
-            realmService.delete(urlToSource: urlToSource)
+            channelRepository.delete(urlToSource: urlToSource)
         } else {
-            realmService.add(title: title, description: description, id: id, urlToSource: urlToSource)
+            channelRepository.add(title: title, description: description, id: id, urlToSource: urlToSource)
         }
         isFavourite.toggle()
     }
 
     func getFavoriteChannels() -> [ChannelViewModel] {
-        let favouriteChannels = realmService.getAll()
-        let mapped = favouriteChannels.map{channel in ChannelViewModel(id: channel.id, name: channel.name, descriptionChannel: channel.descriptionChannel, urlToSource: channel.urlToSource)}
+        let favouriteChannels = channelRepository.getAll()
+        let mapped = favouriteChannels.map{channel in ChannelViewModel(
+                id: channel.id,
+                name: channel.name,
+                descriptionChannel: channel.descriptionChannel,
+                urlToSource: channel.urlToSource)}
         return Array(mapped)
     }
 
