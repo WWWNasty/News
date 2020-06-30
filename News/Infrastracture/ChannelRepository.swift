@@ -6,7 +6,7 @@
 import RealmSwift
 import Foundation
 
-class ChannelRepository: ChannelRepositoryProtocol {
+class  ChannelRepository: ChannelRepositoryProtocol {
 
     var realm: Realm
 

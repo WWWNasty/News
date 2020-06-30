@@ -6,6 +6,8 @@
 //  Copyright © 2020 Настя. All rights reserved.
 //
 
+import Swinject
+import SwinjectAutoregistration
 import UIKit
 import SwiftUI
 import RealmSwift
@@ -19,9 +21,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        let container = Container()
+        container.register(Realm.self, factory: { _ in try! Realm() })
+        container.autoregister(ArticleService.self, initializer: ArticleService.init)
+        container.autoregister(AllNews.self, initializer: AllNews.init)
+        container.autoregister(ChannelService.self, initializer: ChannelService.init)
+        container.autoregister(FavouritesNewsChannels.self, initializer: FavouritesNewsChannels.init)
+        container.autoregister(NewsApiServiceProtocol.self, initializer: NewsApiService.init) // Autoregistration
+        container.autoregister(SearchInAllNews.self, initializer: SearchInAllNews.init)
+        container.autoregister(ChannelRepositoryProtocol.self, initializer: ChannelRepository.init) // Autoregistration
+        container.autoregister(AllNewsChannels.self, initializer: AllNewsChannels.init)
+        container.autoregister(ContentView.self, initializer: ContentView.init)
 
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+
+        let contentView = container.resolve(ContentView.self);
+
 
         print(Realm.Configuration.defaultConfiguration.fileURL!)
 

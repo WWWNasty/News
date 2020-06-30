@@ -9,15 +9,19 @@ import Foundation
 struct SearchInAllNews: View {
     @State private var search = ""
     @State var articles: [ArticleAPIResponse] = []
-
     @Environment(\.imageCache) var cache: ImageCache
+
+    let newsApiService: NewsApiServiceProtocol
+    init(newsApiService: NewsApiServiceProtocol){
+        self.newsApiService = newsApiService
+    }
 
     var body: some View {
         NavigationView {
             VStack {
                 SearchBar(text: $search, onChangeFunction: { (text: String) in
                     if (!self.search.isEmpty) {
-                        NewsApiService().getArticles(searchString: self.search) { (articles) in
+                        self.newsApiService.getArticles(searchString: self.search) { (articles) in
                             self.articles = articles
                         }
                     }
@@ -33,7 +37,7 @@ struct SearchInAllNews: View {
 
 struct thirdViewTab_Previews: PreviewProvider {
     static var previews: some View {
-        SearchInAllNews()
+        SearchInAllNews(newsApiService: NewsApiService())
     }
 }
 

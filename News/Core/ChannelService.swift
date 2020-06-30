@@ -7,9 +7,9 @@ import Foundation
 
 class ChannelService {
 
-    let channelRepository: ChannelRepository
+    let channelRepository: ChannelRepositoryProtocol
 
-    init(realmService: ChannelRepository){
+    init(realmService: ChannelRepositoryProtocol){
         self.channelRepository = realmService
     }
 

@@ -10,14 +10,20 @@ import Foundation
 
 struct FavouritesNewsChannels: View {
     @State var articles: [ArticleAPIResponse] = []
-
     @State var favoriteChannels: [ChannelViewModel] = []
+    let channelService: ChannelService
+    let allNews: AllNews
+
+    init(channelService: ChannelService, allNews: AllNews){
+        self.channelService = channelService
+        self.allNews = allNews
+    }
 
     var body: some View {
         NavigationView {
 
             VStack {
-                NavigationLink(destination: AllNews(articles: self.articles)) {
+                NavigationLink(destination: allNews) {
                     Text("News")
                 }
 
@@ -28,7 +34,7 @@ struct FavouritesNewsChannels: View {
                 }
             }.navigationBarTitle("Favourite channels")
         }.onAppear {
-            self.favoriteChannels = ChannelService(realmService: ChannelRepository(realm: try! Realm())).getFavoriteChannels()
+            self.favoriteChannels = self.channelService.getFavoriteChannels()
         }
     }
 }
@@ -36,6 +42,7 @@ struct FavouritesNewsChannels: View {
 
 struct secondViewTab_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        FavouritesNewsChannels(channelService: ChannelService(realmService: ChannelRepository(realm: try! Realm())),
+                allNews: AllNews(articleService: ArticleService(realmService: ChannelRepository(realm: try! Realm()), api: NewsApiService())))
     }
 }

@@ -5,12 +5,17 @@ PODS:
   - RealmSwift (5.0.3):
     - Realm (= 5.0.3)
   - Swinject (2.7.1)
+  - SwinjectAutoregistration (2.7.0):
+    - Swinject (~> 2.7)
 
 DEPENDENCIES:
   - RealmSwift
   - Swinject
+  - SwinjectAutoregistration
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - SwinjectAutoregistration
   trunk:
     - Realm
     - RealmSwift
@@ -20,7 +25,8 @@ SPEC CHECKSUMS:
   Realm: bfca1699b61b0b17c3a69ae0e648314eae91fbdb
   RealmSwift: 493c9f089cd3893b3959007973c0e4f640906ba0
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
+  SwinjectAutoregistration: 330f5012642a8b5c89a8a4adb0c5e52df07382c0
 
-PODFILE CHECKSUM: 1b9c98d52d29e9ceaa9521926a570470b10d6eb6
+PODFILE CHECKSUM: ba5d4c6d045d230fccfca301eeedc3efc70e5673
 
 COCOAPODS: 1.9.3

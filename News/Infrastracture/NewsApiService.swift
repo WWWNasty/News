@@ -9,6 +9,7 @@ import SwiftUI
 class NewsApiService: NewsApiServiceProtocol {
     let key = "8fcacb54503448489324371c70936f9c"
 
+
     private func makeRequest(url: URL, completion: @escaping ([ArticleAPIResponse]) -> ()){
 
         let cache = URLCache.shared

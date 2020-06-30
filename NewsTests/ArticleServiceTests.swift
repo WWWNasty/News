@@ -2,13 +2,12 @@
 // Created by Настя on 26.06.2020.
 // Copyright (c) 2020 Настя. All rights reserved.
 //
-//import Swinject
-//import SwinjectAutoregistration
+import Swinject
+import SwinjectAutoregistration
 
 import XCTest
 @testable import News
 
-//private let container = Container()
 
 class ArticleServiceTests: XCTestCase {
     private var channelRepositoryMock: ChannelRepositoryMock!

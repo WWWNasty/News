@@ -10,7 +10,11 @@ import RealmSwift
 struct AllNews: View {
     @Environment(\.imageCache) var cache: ImageCache
     @State var articles: [ArticleAPIResponse] = []
+    let articleService: ArticleService
 
+    init(articleService: ArticleService){
+        self.articleService = articleService
+    }
     var body: some View {
         NavigationView {
             VStack {
@@ -19,7 +23,7 @@ struct AllNews: View {
                         NewsList(title: article.title, description: article.description, cache: self.cache, urlToImage: article.urlToImage)
                     }
                 }.onAppear() {
-                    ArticleService(realmService: ChannelRepository(realm: try! Realm()), api: NewsApiService()).getAllFavouriteArticles {
+                    self.articleService.getAllFavouriteArticles {
                         (articles) in self.articles = articles
                     }
 

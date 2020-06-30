@@ -7,10 +7,10 @@ import Foundation
 
 class ArticleService{
 
-    let channelRepository: ChannelRepository
-    let api: NewsApiService
+    let channelRepository: ChannelRepositoryProtocol
+    let api: NewsApiServiceProtocol
 
-    init(realmService: ChannelRepository, api: NewsApiService){
+    init(realmService: ChannelRepositoryProtocol, api: NewsApiServiceProtocol){
         self.api = api
         self.channelRepository = realmService;
     }
