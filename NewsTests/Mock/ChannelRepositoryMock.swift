@@ -17,18 +17,18 @@ class ChannelRepositoryMock: ChannelRepositoryProtocol{
     }
 
     func delete(urlToSource: String) {
-        channels = channels.filter{ channel in channel.urlToSource == urlToSource}
+        channels = channels.filter{ channel in channel.urlToSource != urlToSource}
     }
 
-    func add(title: String, description: String, id: String, urlToSource: String) {
-        let channel = Channel()
+    func add(channel: ChannelViewModel) {
+        let newChannel = Channel()
 
-        channel.name = title
-        channel.descriptionChannel = description
-        channel.id = id
-        channel.urlToSource = urlToSource
+        newChannel.name = channel.name
+        newChannel.descriptionChannel = channel.descriptionChannel
+        newChannel.id = channel.id
+        newChannel.urlToSource = channel.urlToSource
 
-        channels.append(channel)
+        channels.append(newChannel)
     }
 
 

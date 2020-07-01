@@ -10,11 +10,12 @@ class ArticleService{
     let channelRepository: ChannelRepositoryProtocol
     let api: NewsApiServiceProtocol
 
-    init(realmService: ChannelRepositoryProtocol, api: NewsApiServiceProtocol){
+    init(channelRepository: ChannelRepositoryProtocol, api: NewsApiServiceProtocol){
         self.api = api
-        self.channelRepository = realmService;
+        self.channelRepository = channelRepository
     }
 
+    //TODO 0 заменить колбек на что-то похожее на async/await
     func getAllFavouriteArticles(allArticles: @escaping ([ArticleAPIResponse]) -> ()) {
         let channelsDomains = channelRepository.getAll().map { channel in
             channel.id

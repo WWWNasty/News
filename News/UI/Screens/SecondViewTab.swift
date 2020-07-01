@@ -29,7 +29,7 @@ struct FavouritesNewsChannels: View {
 
                 List(favoriteChannels) { channel in
                     VStack {
-                        NewsChannel(isFavourite: true, title: channel.name, description: channel.descriptionChannel, id: channel.id, urlToSource: channel.urlToSource)
+                        NewsChannel(channelService: self.channelService, channel: channel, isFavorite: true)
                     }
                 }
             }.navigationBarTitle("Favourite channels")
@@ -40,9 +40,9 @@ struct FavouritesNewsChannels: View {
 }
 
 
-struct secondViewTab_Previews: PreviewProvider {
-    static var previews: some View {
-        FavouritesNewsChannels(channelService: ChannelService(realmService: ChannelRepository(realm: try! Realm())),
-                allNews: AllNews(articleService: ArticleService(realmService: ChannelRepository(realm: try! Realm()), api: NewsApiService())))
-    }
-}
+//struct secondViewTab_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FavouritesNewsChannels(channelService: ChannelService(channelRepository: ChannelRepository(realm: try! Realm())),
+//                allNews: AllNews(articleService: ArticleService(channelRepository: ChannelRepository(realm: try! Realm()), api: NewsApiService())))
+//    }
+//}

@@ -7,24 +7,24 @@ import Foundation
 import SwiftUI
 
 class NewsApiService: NewsApiServiceProtocol {
+    //TODO вынести в конфиг
     let key = "8fcacb54503448489324371c70936f9c"
 
-
-    private func makeRequest(url: URL, completion: @escaping ([ArticleAPIResponse]) -> ()){
+    private func makeRequest(url: URL, completion: @escaping ([ArticleAPIResponse]) -> ()) {
 
         let cache = URLCache.shared
         let request = URLRequest(url: url)
         //в случае ошибки  доставать из кеша
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil {
+                //TODO показывать на ui что взято из кеша
                 if let data = cache.cachedResponse(for: request)?.data {
                     let newsAPIResponse = try! JSONDecoder().decode(NewsAPIResponse.self, from: data)
                     DispatchQueue.main.async {
                         completion(newsAPIResponse.articles)
                     }
                 }
-            }
-            else {
+            } else {
                 let newsAPIResponse = try! JSONDecoder().decode(NewsAPIResponse.self, from: data!)
                 //добавлять новые записи в кеш
                 let cachedData = CachedURLResponse(response: response!, data: data!)
@@ -40,7 +40,7 @@ class NewsApiService: NewsApiServiceProtocol {
         guard let url = URL(string: "https://newsapi.org/v2/everything?q=\(searchString)&apiKey=\(key)") else {
             return
         }
-         makeRequest(url: url, completion: completion)
+        makeRequest(url: url, completion: completion)
     }
 
     func getFavouriteArticles(domains: String, completion: @escaping ([ArticleAPIResponse]) -> ()) {
@@ -50,22 +50,24 @@ class NewsApiService: NewsApiServiceProtocol {
         guard let url = URL(string: "https://newsapi.org/v2/everything?domains=\(domains)&apiKey=\(key)") else {
             return
         }
-        makeRequest(url: url, completion: completion )
+        makeRequest(url: url, completion: completion)
 
     }
 
-    func getChannels(completion: @escaping ([SourceChannel]) -> ()) {
+    func getChannels(completion: @escaping ([ChannelViewModel]) -> ()) {
 
         guard let urlChannels = URL(string: "https://newsapi.org/v2/sources?apiKey=\(key)") else {
             return
         }
         URLSession.shared.dataTask(with: urlChannels) { (data, _, error) in
-                    if error != nil{
+                    if error != nil {
+                        // TODO показать ошибку на ui
                         return
                     } else {
                         let channelAPIResponse = try! JSONDecoder().decode(ChannelsAPIResponse.self, from: data!)
                         DispatchQueue.main.async {
-                            completion(channelAPIResponse.sources)
+                            completion(channelAPIResponse.sources.map{ channel in ChannelViewModel(id: channel.id.replacingOccurrences(of: "https://", with: "")
+                                    .replacingOccurrences(of: "http://", with: ""), name: channel.name, descriptionChannel: channel.description, urlToSource: channel.id) })
                         }
                     }
                 }

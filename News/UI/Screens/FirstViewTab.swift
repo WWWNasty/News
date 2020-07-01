@@ -8,7 +8,7 @@ import SwiftUI
 import Foundation
 
 struct AllNewsChannels: View {
-    @State var channels: [SourceChannel] = []
+    @State var channels: [ChannelViewModel] = []
     @State var favoriteChannels: [ChannelViewModel] = []
     let newsApiService: NewsApiServiceProtocol
     let channelService: ChannelService
@@ -22,18 +22,17 @@ struct AllNewsChannels: View {
         NavigationView {
             VStack {
                 List(channels) { channel in
-                    NewsChannel(isFavourite: self.favoriteChannels.contains { favouriteChannel in
-                        channel.id == favouriteChannel.urlToSource
-                    }, title: channel.name, description: channel.description, id: channel.id, urlToSource: channel.id)
+                    NewsChannel(channelService: self.channelService, channel: channel, isFavorite: self.favoriteChannels.contains { favouriteChannel in
+                        channel.id == favouriteChannel.id
+                    })
                 }
             }.navigationBarTitle("Channels")
+        }.onAppear {
+            self.newsApiService.getChannels { channels in
+                self.channels = channels
+            }
+            self.favoriteChannels = self.channelService.getFavoriteChannels()
         }
-                .onAppear {
-                    self.newsApiService.getChannels { channels in
-                        self.channels = channels
-                    }
-                    self.favoriteChannels = self.channelService.getFavoriteChannels()
-                }
     }
 }
 

@@ -9,19 +9,24 @@ class ChannelService {
 
     let channelRepository: ChannelRepositoryProtocol
 
-    init(realmService: ChannelRepositoryProtocol){
-        self.channelRepository = realmService
+    init(channelRepository: ChannelRepositoryProtocol){
+        self.channelRepository = channelRepository
     }
 
-    func makeFavourite(title: String, description: String, id: String, urlToSource: String, isFavourite: inout Bool) {
+
+    //TODO 8 собрать в одну вью модель
+    func makeFavourite(channel: ChannelViewModel, isFavourite: Bool) -> Bool {
         if isFavourite {
-            channelRepository.delete(urlToSource: urlToSource)
+            channelRepository.delete(urlToSource: channel.urlToSource)
         } else {
-            channelRepository.add(title: title, description: description, id: id, urlToSource: urlToSource)
+            //TODO тут тоже передать ее
+            channelRepository.add(channel: channel)
         }
-        isFavourite.toggle()
+
+        return !isFavourite
     }
 
+    //TODO 0 если есть простой автомапер то заменить на него
     func getFavoriteChannels() -> [ChannelViewModel] {
         let favouriteChannels = channelRepository.getAll()
         let mapped = favouriteChannels.map{channel in ChannelViewModel(

@@ -2,8 +2,6 @@
 // Created by Настя on 26.06.2020.
 // Copyright (c) 2020 Настя. All rights reserved.
 //
-import Swinject
-import SwinjectAutoregistration
 
 import XCTest
 @testable import News
@@ -12,8 +10,10 @@ import XCTest
 class ArticleServiceTests: XCTestCase {
     private var channelRepositoryMock: ChannelRepositoryMock!
     private var newsApiServiceMock: NewsApiServiceMock!
+    private var articleService: ArticleService!
 
-    override func setUp() {
+
+    override func setUpWithError() throws{
 
 
         channelRepositoryMock = ChannelRepositoryMock(channels: [
@@ -34,7 +34,7 @@ class ArticleServiceTests: XCTestCase {
                 $0.name = "nameChannel3"
                 $0.descriptionChannel = "descriptionChannel3"
                 $0.urlToSource = "urlToSource3"
-            },
+            }
 
         ])
         newsApiServiceMock = NewsApiServiceMock(
@@ -65,26 +65,30 @@ class ArticleServiceTests: XCTestCase {
             )
         ],
                 sourceChannel: [
-            SourceChannel(
+            ChannelViewModel(
                     id: "Channel1",
                     name: "nameChannel1", 
-                    description: "descriptionChannel1"
+                    descriptionChannel: "descriptionChannel1",
+                    urlToSource: "String"
             ),
-            SourceChannel(
+            ChannelViewModel(
                     id: "sourceChannelid2", 
                     name: "sourceChannelname2", 
-                    description: "sourceChanneldescription2"
+                    descriptionChannel: "sourceChanneldescription2",
+                    urlToSource: "String"
             ),
-            SourceChannel(
+            ChannelViewModel(
                     id: "sourceChannelid3", 
                     name: "sourceChannelname3", 
-                    description: "sourceChanneldescription3"
+                    descriptionChannel: "sourceChanneldescription3",
+                    urlToSource: "String"
             )
 
         ])
+        articleService = ArticleService(channelRepository: channelRepositoryMock, api: newsApiServiceMock)
     }
 
-    func testGetAllFavouriteArticles() {
+    func testGetAllFavouriteArticles() throws{
         //Arrange
         let expectedResult = [ArticleAPIResponse(
                 id: "article1",
@@ -110,13 +114,9 @@ class ArticleServiceTests: XCTestCase {
                 urlToImage: "urlToImage3"
 
         )]
-        let sourceChannel = channelRepositoryMock.getAll().map { channel in
-            channel.id
-        }.joined(separator: ",")
         //Act
-        var actualResult: [ArticleAPIResponse] = [];
-        newsApiServiceMock.getFavouriteArticles(domains: sourceChannel) { responses in actualResult = responses }
-        //Assert
+        var actualResult: [ArticleAPIResponse] = []
+        articleService.getAllFavouriteArticles { responses in actualResult = responses }
         XCTAssert(actualResult == expectedResult)
 
     }

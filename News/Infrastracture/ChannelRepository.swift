@@ -20,27 +20,32 @@ class  ChannelRepository: ChannelRepositoryProtocol {
     }
 
     func delete(urlToSource: String) {
-        let channel = realm.objects(Channel.self).filter("urlToSource = '\(urlToSource)'")
-        try! realm.write {
-            realm.delete(channel)
+        do {
+            let channel = realm.objects(Channel.self).filter("urlToSource = '\(urlToSource)'")
+            try realm.write {
+                realm.delete(channel)
+            }
+        } catch {
+            //TODO возвращать из функции false например и на ui показать, что ошибка
+            print(error.localizedDescription)
         }
-
     }
 
-    func add(title: String, description: String, id: String, urlToSource: String) {
+    func add(channel: ChannelViewModel) {
         do {
-            let newData = Channel()
+            let newData = Channel {
+                $0.id = channel.id
+                $0.descriptionChannel = channel.descriptionChannel
+                $0.name = channel.name
+                $0.urlToSource = channel.urlToSource
+            }
 
-            newData.id = id.replacingOccurrences(of: "https://", with: "")
-                    .replacingOccurrences(of: "http://", with: "")
-            newData.descriptionChannel = description
-            newData.name = title
-            newData.urlToSource = id
             try realm.write({
                 realm.add(newData)
                 print("success")
             })
         } catch {
+            //TODO возвращать из функции false например и на ui показать, что ошибка
             print(error.localizedDescription)
         }
     }

@@ -20,13 +20,12 @@ struct AllNews: View {
             VStack {
                 List (articles) { (article: ArticleAPIResponse) in
                     VStack {
-                        NewsList(title: article.title, description: article.description, cache: self.cache, urlToImage: article.urlToImage)
+                        CardArticle(article: article, cache: self.cache)
                     }
                 }.onAppear() {
-                    self.articleService.getAllFavouriteArticles {
-                        (articles) in self.articles = articles
+                    self.articleService.getAllFavouriteArticles { (articles) in
+                        self.articles = articles
                     }
-
                 }
             }
         }.navigationBarTitle("List all news")

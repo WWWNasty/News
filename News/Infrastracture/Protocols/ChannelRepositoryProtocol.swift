@@ -8,5 +8,5 @@ import Foundation
 protocol ChannelRepositoryProtocol {
     func getAll() -> [Channel]
     func delete(urlToSource: String)
-    func add(title: String, description: String, id: String, urlToSource: String)
+    func add(channel: ChannelViewModel)
 }

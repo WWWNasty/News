@@ -8,9 +8,9 @@ import Foundation
 class NewsApiServiceMock: NewsApiServiceProtocol{
 
     var articles: [ArticleAPIResponse]
-    var sourceChannel: [SourceChannel]
+    var sourceChannel: [ChannelViewModel]
 
-    init(articles: [ArticleAPIResponse], sourceChannel: [SourceChannel]){
+    init(articles: [ArticleAPIResponse], sourceChannel: [ChannelViewModel]){
         self.articles = articles
         self.sourceChannel = sourceChannel
     }
@@ -23,9 +23,7 @@ class NewsApiServiceMock: NewsApiServiceProtocol{
         completion(articles)
     }
 
-    func getChannels(completion: @escaping ([SourceChannel]) -> ()) {
+    func getChannels(completion: @escaping ([ChannelViewModel]) -> ()) {
         completion(sourceChannel)
     }
-
-
 }

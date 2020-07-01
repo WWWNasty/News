@@ -7,9 +7,9 @@
             buildForTesting = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4D1A3F5424A7A27D00347C3D"
-               BuildableName = "ArticlesServiseTests.xctest"
-               BlueprintName = "ArticlesServiseTests"
+               BlueprintIdentifier = "4D5FC7C4248B015D00A10091"
+               BuildableName = "NewsTests.xctest"
+               BlueprintName = "NewsTests"
                ReferencedContainer = "container:News.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -21,9 +21,9 @@
          <TestableReference>
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4D1A3F5424A7A27D00347C3D"
-               BuildableName = "ArticlesServiseTests.xctest"
-               BlueprintName = "ArticlesServiseTests"
+               BlueprintIdentifier = "4D5FC7C4248B015D00A10091"
+               BuildableName = "NewsTests.xctest"
+               BlueprintName = "NewsTests"
                ReferencedContainer = "container:News.xcodeproj">
             </BuildableReference>
          </TestableReference>

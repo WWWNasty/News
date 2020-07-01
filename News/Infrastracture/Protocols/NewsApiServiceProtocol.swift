@@ -8,5 +8,5 @@ import Foundation
 protocol NewsApiServiceProtocol {
     func getArticles(searchString: String, completion: @escaping ([ArticleAPIResponse]) -> ())
     func getFavouriteArticles(domains: String, completion: @escaping ([ArticleAPIResponse]) -> ())
-    func getChannels(completion: @escaping ([SourceChannel]) -> ())
+    func getChannels(completion: @escaping ([ChannelViewModel]) -> ())
 }

@@ -28,7 +28,7 @@ struct SearchInAllNews: View {
                 })
 
                 List(articles) { (article: ArticleAPIResponse) in
-                    NewsList(title: article.title, description: article.description, cache: self.cache, urlToImage: article.urlToImage)
+                    CardArticle(article: article, cache: self.cache)
                 }
             }.navigationBarTitle("Search")
         }.gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
