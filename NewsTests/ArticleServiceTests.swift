@@ -117,6 +117,7 @@ class ArticleServiceTests: XCTestCase {
         //Act
         var actualResult: [ArticleAPIResponse] = []
         articleService.getAllFavouriteArticles { responses in actualResult = responses }
+        //Assert
         XCTAssert(actualResult == expectedResult)
 
     }

@@ -14,12 +14,10 @@ class ChannelService {
     }
 
 
-    //TODO 8 собрать в одну вью модель
     func makeFavourite(channel: ChannelViewModel, isFavourite: Bool) -> Bool {
         if isFavourite {
             channelRepository.delete(urlToSource: channel.urlToSource)
         } else {
-            //TODO тут тоже передать ее
             channelRepository.add(channel: channel)
         }
 
